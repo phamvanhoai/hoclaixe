@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Driving Theory - Study All Questions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#136dec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101822",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-background-light dark:bg-background-dark shadow-xl overflow-x-hidden">
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="flex items-center p-4 justify-between gap-4">
+<div class="text-slate-900 dark:text-slate-100 flex size-10 shrink-0 items-center justify-center rounded-lg hover:bg-primary/10 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1">Study All Questions</h2>
+<div class="size-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">info</span>
+</div>
+</div>
+<div class="px-4 pb-4">
+<label class="flex flex-col w-full">
+<div class="flex w-full items-stretch rounded-xl h-12 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">
+<div class="text-slate-400 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full border-none bg-transparent focus:ring-0 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 text-base font-normal px-3" placeholder="Search questions or categories" value=""/>
+</div>
+</label>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto">
+<div class="flex flex-col gap-3 p-4 bg-white dark:bg-slate-800 mx-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="flex gap-6 justify-between items-end">
+<div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider">Overall Progress</p>
+<p class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-none mt-1">Total Questions Learned</p>
+</div>
+<p class="text-primary text-sm font-bold bg-primary/10 px-2 py-1 rounded-lg">200 / 600</p>
+</div>
+<div class="relative h-3 w-full rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden">
+<div class="absolute top-0 left-0 h-full rounded-full bg-primary" style="width: 33.3%;"></div>
+</div>
+<div class="flex justify-between items-center">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">33% completed</p>
+<p class="text-slate-400 dark:text-slate-500 text-xs italic">Keep going!</p>
+</div>
+</div>
+<div class="px-4 pt-6 pb-2 flex items-center justify-between">
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold">Categories</h3>
+<span class="text-primary text-xs font-semibold cursor-pointer">View All</span>
+</div>
+<div class="flex flex-col gap-4 p-4 pb-24">
+<div class="group flex flex-col gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm active:scale-[0.98] transition-all">
+<div class="flex items-start gap-4">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">gavel</span>
+</div>
+<div class="flex flex-col flex-1 gap-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-bold leading-snug">Khái niệm và quy tắc giao thông</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">166 Questions</p>
+</div>
+<div class="text-slate-300 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
+<span>Progress</span>
+<span class="text-slate-600 dark:text-slate-300">45 / 166</span>
+</div>
+<div class="h-2 w-full rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden">
+<div class="h-full rounded-full bg-primary" style="width: 27%;"></div>
+</div>
+</div>
+</div>
+<div class="group flex flex-col gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm active:scale-[0.98] transition-all">
+<div class="flex items-start gap-4">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">traffic</span>
+</div>
+<div class="flex flex-col flex-1 gap-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-bold leading-snug">Hệ thống biển báo đường bộ</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">182 Questions</p>
+</div>
+<div class="text-slate-300 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
+<span>Progress</span>
+<span class="text-slate-600 dark:text-slate-300">120 / 182</span>
+</div>
+<div class="h-2 w-full rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden">
+<div class="h-full rounded-full bg-primary" style="width: 66%;"></div>
+</div>
+</div>
+</div>
+<div class="group flex flex-col gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm active:scale-[0.98] transition-all">
+<div class="flex items-start gap-4">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">conversion_path</span>
+</div>
+<div class="flex flex-col flex-1 gap-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-bold leading-snug">Giải các thế sa hình</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">114 Questions</p>
+</div>
+<div class="text-slate-300 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
+<span>Progress</span>
+<span class="text-slate-600 dark:text-slate-300">12 / 114</span>
+</div>
+<div class="h-2 w-full rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden">
+<div class="h-full rounded-full bg-primary" style="width: 10%;"></div>
+</div>
+</div>
+</div>
+<div class="group flex flex-col gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm active:scale-[0.98] transition-all">
+<div class="flex items-start gap-4">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">minor_crash</span>
+</div>
+<div class="flex flex-col flex-1 gap-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-bold leading-snug">Văn hóa và đạo đức lái xe</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">58 Questions</p>
+</div>
+<div class="text-slate-300 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
+<span>Progress</span>
+<span class="text-slate-600 dark:text-slate-300">23 / 58</span>
+</div>
+<div class="h-2 w-full rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden">
+<div class="h-full rounded-full bg-primary" style="width: 40%;"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-4 pb-6 pt-3 flex justify-between items-center z-20">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-bold uppercase tracking-tight">Home</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">menu_book</span>
+<span class="text-[10px] font-bold uppercase tracking-tight">Learn</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="text-[10px] font-bold uppercase tracking-tight">Tests</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold uppercase tracking-tight">Profile</span>
+</a>
+</nav>
+</div>
+</body></html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#136dec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101822",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>DrivePass - Driving Theory Dashboard</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen flex-col overflow-x-hidden max-w-md mx-auto bg-white dark:bg-slate-900 shadow-xl">
+<!-- Header Section -->
+<header class="flex items-center p-4 justify-between bg-white dark:bg-slate-900 sticky top-0 z-10 border-b border-slate-100 dark:border-slate-800">
+<div class="flex size-10 shrink-0 items-center overflow-hidden rounded-full border-2 border-primary/20">
+<div class="bg-center bg-no-repeat aspect-square bg-cover w-full h-full" data-alt="User profile portrait of a smiling young man" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDUcikx4873J-KJwB4Kb_3eXkrR_9ptw7-IVWDFCxDGxgeiJXnBSdcdxBHvQKkzhC51sA6f-u156B-5HYRBQfjbWhzvpPTr7gKK4ZnVBN9ap7ZRgqRLfr289UQ0eKfh7jcJUH19VciL7BBtyw7CInkbYVtID66gwPyqHdQm5QshQd5SnrYXmb5nsCpZb6EldWywTZ3aC_B33-Goh8Vz2UxxkMAyMaQP_aAj89icKvL_OX9hGB4ttFCTLwhrV59XUUa7qnxgt97BP-U");'></div>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 ml-3">Dashboard</h2>
+<div class="flex gap-2">
+<button class="flex size-10 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="relative flex size-10 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 flex h-2 w-2 rounded-full bg-red-500"></span>
+</button>
+</div>
+</header>
+<main class="flex-1 pb-24">
+<!-- Welcome Summary -->
+<section class="p-4">
+<div class="flex w-full flex-col gap-1">
+<p class="text-slate-900 dark:text-slate-100 text-2xl font-bold leading-tight">Welcome back, Alex!</p>
+<div class="flex items-center gap-2">
+<span class="text-primary text-sm font-semibold uppercase tracking-wider">Learner ID: 882910</span>
+<span class="h-1 w-1 rounded-full bg-slate-300 dark:bg-slate-600"></span>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Exam in 12 days</p>
+</div>
+</div>
+</section>
+<!-- Progress Tracking Card -->
+<section class="px-4 mb-6">
+<div class="flex flex-col rounded-xl overflow-hidden shadow-sm bg-primary/5 dark:bg-primary/10 border border-primary/10">
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold">Overall Progress</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-1">422 of 650 Questions completed</p>
+</div>
+<div class="bg-primary text-white size-12 rounded-lg flex items-center justify-center font-bold text-lg">
+                                65%
+                            </div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="h-2.5 w-full rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all" style="width: 65%;"></div>
+</div>
+<p class="text-primary text-xs font-medium text-right">You're doing great! Keep going.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Access Grid -->
+<section class="px-4">
+<h3 class="text-slate-900 dark:text-slate-100 text-base font-bold mb-4">Study Tools</h3>
+<div class="grid grid-cols-2 gap-4">
+<!-- Mock Test -->
+<a class="flex flex-col items-center justify-center p-6 rounded-xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm hover:border-primary/50 transition-all group" href="#">
+<div class="size-14 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">timer</span>
+</div>
+<span class="text-slate-900 dark:text-slate-100 font-semibold text-sm">Mock Test</span>
+<span class="text-slate-400 text-[10px] mt-1 uppercase font-bold tracking-tight">Full Exam</span>
+</a>
+<!-- Practice by Topic -->
+<a class="flex flex-col items-center justify-center p-6 rounded-xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm hover:border-primary/50 transition-all group" href="#">
+<div class="size-14 rounded-full bg-green-50 dark:bg-green-900/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-green-600 text-3xl">category</span>
+</div>
+<span class="text-slate-900 dark:text-slate-100 font-semibold text-sm text-center">Practice Topics</span>
+<span class="text-slate-400 text-[10px] mt-1 uppercase font-bold tracking-tight">14 Categories</span>
+</a>
+<!-- Incorrect Questions -->
+<a class="flex flex-col items-center justify-center p-6 rounded-xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm hover:border-primary/50 transition-all group" href="#">
+<div class="size-14 rounded-full bg-red-50 dark:bg-red-900/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-red-600 text-3xl">error_med</span>
+</div>
+<span class="text-slate-900 dark:text-slate-100 font-semibold text-sm text-center">Review Mistakes</span>
+<span class="text-slate-400 text-[10px] mt-1 uppercase font-bold tracking-tight">28 Items</span>
+</a>
+<!-- Signboard Lookup -->
+<a class="flex flex-col items-center justify-center p-6 rounded-xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm hover:border-primary/50 transition-all group" href="#">
+<div class="size-14 rounded-full bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-amber-600 text-3xl">traffic</span>
+</div>
+<span class="text-slate-900 dark:text-slate-100 font-semibold text-sm text-center">Sign Library</span>
+<span class="text-slate-400 text-[10px] mt-1 uppercase font-bold tracking-tight">All Symbols</span>
+</a>
+</div>
+</section>
+<!-- Weekly Activity Banner -->
+<section class="p-4 mt-6">
+<div class="relative overflow-hidden rounded-xl bg-slate-900 p-6 text-white min-h-[160px] flex flex-col justify-center">
+<div class="absolute inset-0 opacity-20" data-alt="Blurred background of a car steering wheel and dashboard at night" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCTIT1J7m6tK7gfN9FcPY23oRX3B_JkesOJZhnQYRRagr8t3ZGleuvhQoRgB0Y5hYUpjBU9eKR9AZOxtNtkK58L3qZtGvJaRr5GbdB5ksZklSOY8aYS5KpPQ0Xx9vAioGg_tGi5Qgg6HU0rNaEe2e2vd-zOpGMYoN2M8B8wezXlZ284e958bBDaRkyHbelDw3zo3UuyxoJYW_kRzuXmvKWwE2HbTzJwdY2dW9zr9M2wTrw_VXpg4Wlxi6eItBNAyNl4hrCDKyGowUk");'></div>
+<div class="relative z-10">
+<h4 class="text-xl font-bold">Ready for a real drive?</h4>
+<p class="text-slate-300 text-sm mt-2 max-w-[200px]">Complete 3 more mock tests to unlock the 'Exam Ready' badge.</p>
+<button class="mt-4 px-4 py-2 bg-primary hover:bg-primary/90 rounded-lg text-sm font-bold transition-all inline-flex items-center gap-2">
+                            Take Challenge <span class="material-symbols-outlined text-sm">trending_up</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-6 pb-6 pt-3 flex justify-between items-center z-20">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-1">grid_view</span>
+<p class="text-[10px] font-bold uppercase tracking-widest">Home</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<p class="text-[10px] font-bold uppercase tracking-widest">Learn</p>
+</a>
+<div class="relative -top-6">
+<button class="size-14 rounded-full bg-primary text-white shadow-lg shadow-primary/40 flex items-center justify-center hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-3xl">play_arrow</span>
+</button>
+</div>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<p class="text-[10px] font-bold uppercase tracking-widest">Stats</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<p class="text-[10px] font-bold uppercase tracking-widest">Profile</p>
+</a>
+</nav>
+</div>
+</body></html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#136dec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101822",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>.scrollbar-hide::-webkit-scrollbar { display: none; } .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }</style></head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Main Container -->
+<div class="relative flex h-auto min-h-screen w-full max-w-md mx-auto flex-col bg-background-light dark:bg-background-dark overflow-x-hidden">
+<!-- Top App Bar -->
+<div class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10 border-b border-slate-200 dark:border-slate-800">
+<div class="text-slate-900 dark:text-slate-100 flex size-10 shrink-0 items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center">Study All Questions</h2>
+<div class="flex w-10 items-center justify-end">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-transparent text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+</div>
+<!-- Progress Section -->
+<div class="flex flex-col gap-2 p-4">
+<div class="flex justify-between items-center">
+<p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Question 45 of 100</p>
+<div class="flex gap-1">
+<span class="h-2 w-2 rounded-full bg-primary"></span>
+<span class="h-2 w-2 rounded-full bg-primary"></span>
+<span class="h-2 w-2 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+</div>
+</div>
+<div class="rounded-full bg-slate-200 dark:bg-slate-800 h-2 w-full overflow-hidden">
+<div class="h-full rounded-full bg-primary" style="width: 45%;"></div>
+</div>
+</div><div class="px-4 mb-4">
+<div class="flex items-center justify-between mb-3">
+<h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Progress</h3>
+<span class="text-[10px] font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-full">44 Answered</span>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+<!-- Answered Questions -->
+<button class="flex-shrink-0 size-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold text-sm shadow-sm shadow-primary/20">41</button>
+<button class="flex-shrink-0 size-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold text-sm shadow-sm shadow-primary/20">42</button>
+<button class="flex-shrink-0 size-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold text-sm shadow-sm shadow-primary/20">43</button>
+<button class="flex-shrink-0 size-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold text-sm shadow-sm shadow-primary/20">44</button>
+<!-- Current Question -->
+<button class="flex-shrink-0 size-10 flex items-center justify-center rounded-lg border-2 border-primary bg-white dark:bg-slate-800 text-primary font-bold text-sm ring-2 ring-primary/10">45</button>
+<!-- Remaining Questions -->
+<button class="flex-shrink-0 size-10 flex items-center justify-center rounded-lg border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-slate-400 font-medium text-sm hover:border-primary/40 transition-colors">46</button>
+<button class="flex-shrink-0 size-10 flex items-center justify-center rounded-lg border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-slate-400 font-medium text-sm hover:border-primary/40 transition-colors">47</button>
+<button class="flex-shrink-0 size-10 flex items-center justify-center rounded-lg border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-slate-400 font-medium text-sm hover:border-primary/40 transition-colors">48</button>
+<button class="flex-shrink-0 size-10 flex items-center justify-center rounded-lg border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-slate-400 font-medium text-sm hover:border-primary/40 transition-colors">49</button>
+<button class="flex-shrink-0 size-10 flex items-center justify-center rounded-lg border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-slate-400 font-medium text-sm hover:border-primary/40 transition-colors">50</button>
+<div class="flex-shrink-0 size-10 flex items-center justify-center text-slate-300">...</div>
+<button class="flex-shrink-0 size-10 flex items-center justify-center rounded-lg border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-slate-400 font-medium text-sm hover:border-primary/40 transition-colors">100</button>
+</div>
+</div>
+<!-- Question Content -->
+<div class="px-4 py-2">
+<h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-snug">What is the correct action when encountering this road sign?</h3>
+</div>
+<!-- Illustration Image -->
+<div class="p-4">
+<div class="w-full aspect-video rounded-xl overflow-hidden bg-slate-200 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 relative">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Regulatory red circle no entry road sign on street" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAjbgQL_s-ijBp4IGgqs9hnHYep93uIeeD_qg_s8k2G3pg0p7jgu7AKV8x8PoUo3uleK0II3qB0y3JHLKTctBKvG20Tj_ZQHfDZCMuJbDhZbRTsf1R35hWkLt_bhQPhjox25CtybXZNXYdQZJh2T8xTgiI6H4kCF6LDNXeVneMnhaqNiCBfH6Bt-WbvxOnr9n3ogOZjUnZkp3N1lfdKOq2htWQvPdWhUPm6Dpni4uzZRiNiKxAHKjctnwP2aCW9QzbQZCAShgCYUvM");'></div>
+</div>
+</div>
+<!-- Multiple Choice Options -->
+<div class="flex flex-col gap-3 p-4">
+<label class="flex items-center gap-4 rounded-xl border-2 border-slate-200 dark:border-slate-800 p-4 transition-colors cursor-pointer hover:border-primary/50">
+<input class="h-5 w-5 border-2 border-slate-300 dark:border-slate-700 bg-transparent text-primary focus:ring-primary focus:ring-offset-0" name="question-choice" type="radio"/>
+<div class="flex grow flex-col">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium">Proceed with caution at 20mph</p>
+</div>
+</label>
+<!-- Selected/Active state example -->
+<label class="flex items-center gap-4 rounded-xl border-2 border-primary bg-primary/5 p-4 transition-colors cursor-pointer">
+<input checked="" class="h-5 w-5 border-2 border-primary bg-transparent text-primary focus:ring-primary focus:ring-offset-0" name="question-choice" type="radio"/>
+<div class="flex grow flex-col">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium">Do not enter the roadway</p>
+</div>
+</label>
+<label class="flex items-center gap-4 rounded-xl border-2 border-slate-200 dark:border-slate-800 p-4 transition-colors cursor-pointer hover:border-primary/50">
+<input class="h-5 w-5 border-2 border-slate-300 dark:border-slate-700 bg-transparent text-primary focus:ring-primary focus:ring-offset-0" name="question-choice" type="radio"/>
+<div class="flex grow flex-col">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium">One-way traffic only</p>
+</div>
+</label>
+</div>
+<!-- Tips Section (Mẹo học) -->
+<div class="mx-4 mb-4 p-4 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50">
+<div class="flex items-center gap-2 mb-2 text-amber-700 dark:text-amber-400">
+<span class="material-symbols-outlined text-[20px]">lightbulb</span>
+<span class="text-sm font-bold uppercase tracking-wider">Mẹo học</span>
+</div>
+<p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
+                Biển báo hình tròn viền đỏ, nền trắng với một gạch ngang màu đỏ là biển "Cấm đi ngược chiều". Hãy nhớ: <span class="font-bold">Đỏ = Cấm</span>.
+            </p>
+</div>
+<!-- Action Buttons -->
+<div class="mt-auto p-4 bg-background-light dark:bg-background-dark border-t border-slate-200 dark:border-slate-800">
+<div class="flex gap-3">
+<button class="flex-1 flex items-center justify-center gap-2 rounded-xl h-14 bg-primary text-white font-bold text-lg shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+<span>Check Answer</span>
+<span class="material-symbols-outlined">task_alt</span>
+</button>
+</div>
+<!-- Navigation -->
+<div class="flex items-center justify-between mt-6 px-2">
+<button class="flex items-center gap-1 text-slate-500 dark:text-slate-400 font-medium hover:text-primary">
+<span class="material-symbols-outlined">chevron_left</span>
+<span>Previous</span>
+</button>
+<div class="flex gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700"></div>
+<div class="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700"></div>
+</div>
+<button class="flex items-center gap-1 text-primary font-bold hover:translate-x-1 transition-transform">
+<span>Next</span>
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Spacer for bottom safe area -->
+<div class="h-6"></div>
+</div>
+</body></html>
