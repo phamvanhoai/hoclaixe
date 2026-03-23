@@ -1,4 +1,4 @@
-﻿import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import ScreenContainer from '../components/common/ScreenContainer';
 import SectionTitle from '../components/common/SectionTitle';
@@ -27,64 +27,60 @@ export default function ProfileScreen({ navigation }) {
         <View style={styles.avatarWrap}>
           <Text style={styles.avatarText}>HL</Text>
         </View>
-        <Text style={styles.name}>Hoc vien moi</Text>
-        <Text style={styles.meta}>Member since 03/2026 • Learner ID GPLX-2026-001</Text>
+        <Text style={styles.name}>Học viên mới</Text>
+        <Text style={styles.meta}>Tham gia từ 03/2026 • Mã học viên GPLX-2026-001</Text>
       </View>
 
       <View style={styles.statsRow}>
         <View style={styles.statCard}>
           <Text style={styles.statValue}>{stats.completionRate}%</Text>
-          <Text style={styles.statLabel}>Hoan thanh</Text>
+          <Text style={styles.statLabel}>Hoàn thành</Text>
         </View>
         <View style={styles.statCard}>
           <Text style={styles.statValue}>{stats.accuracy}%</Text>
-          <Text style={styles.statLabel}>Do chinh xac</Text>
+          <Text style={styles.statLabel}>Độ chính xác</Text>
         </View>
         <View style={styles.statCard}>
           <Text style={styles.statValue}>{weeklyActivity}</Text>
-          <Text style={styles.statLabel}>7 ngay</Text>
+          <Text style={styles.statLabel}>7 ngày</Text>
         </View>
       </View>
 
-      <SectionTitle title="Tai khoan va du lieu" subtitle="Du lieu tien do duoc luu cuc bo bang AsyncStorage" />
+      <SectionTitle title="Tài khoản và dữ liệu" subtitle="Dữ liệu tiến độ được lưu cục bộ trên thiết bị" />
       <View style={styles.settingsWrap}>
         <SettingRow
-          title="Hang bang dang hoc"
+          title="Hạng bằng đang học"
           subtitle={`${selectedLicense.code} - ${selectedLicense.title}`}
           onPress={() => navigation.navigate('LicenseTypes')}
         />
         <SettingRow
-          title="Cau da luu"
-          subtitle={`${bookmarkedQuestions.length} cau danh dau de xem lai`}
+          title="Câu đã lưu"
+          subtitle={`${bookmarkedQuestions.length} câu đánh dấu để xem lại`}
           onPress={() =>
             bookmarkedQuestions.length > 0
               ? navigation.navigate('QuestionSession', {
                   mode: 'review',
                   questionIds: bookmarkedQuestions.map((item) => item.id),
-                  title: 'Cau da danh dau',
+                  title: 'Câu đã đánh dấu',
                   sessionSeed: Date.now(),
                 })
               : null
           }
         />
         <SettingRow
-          title="Dat lai tien do"
-          subtitle="Xoa tien do hoc, lich su thi va cau da luu"
+          title="Đặt lại tiến độ"
+          subtitle="Xóa tiến độ học, lịch sử thi và câu đã lưu"
           danger
           onPress={() =>
-            Alert.alert('Dat lai tien do', 'Ban co chac muon xoa toan bo du lieu hoc hien tai?', [
-              { text: 'Huy', style: 'cancel' },
-              { text: 'Dat lai', style: 'destructive', onPress: resetProgress },
+            Alert.alert('Đặt lại tiến độ', 'Bạn có chắc muốn xóa toàn bộ dữ liệu học hiện tại?', [
+              { text: 'Hủy', style: 'cancel' },
+              { text: 'Đặt lại', style: 'destructive', onPress: resetProgress },
             ])
           }
         />
       </View>
 
-      <PrimaryButton
-        label="On lai cau sai"
-        icon="refresh-circle"
-        onPress={() => navigation.navigate('Mistakes')}
-      />
+      <PrimaryButton label="Ôn lại câu sai" icon="refresh-circle" onPress={() => navigation.navigate('Mistakes')} />
     </ScreenContainer>
   );
 }

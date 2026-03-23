@@ -1,4 +1,4 @@
-﻿import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -43,7 +43,7 @@ function getTabIcon(routeName, focused) {
     return focused ? 'clipboard-check' : 'clipboard-check-outline';
   }
   if (routeName === 'Signs') {
-    return focused ? 'sign-direction' : 'sign-direction';
+    return 'sign-direction';
   }
   return focused ? 'account-circle' : 'account-circle-outline';
 }
@@ -71,11 +71,11 @@ function MainTabs() {
         ),
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} options={{ title: 'Trang chu' }} />
-      <Tab.Screen name="Study" component={StudyScreen} options={{ title: 'Hoc' }} />
-      <Tab.Screen name="Tests" component={TestsScreen} options={{ title: 'Thi thu' }} />
-      <Tab.Screen name="Signs" component={SignsScreen} options={{ title: 'Bien bao' }} />
-      <Tab.Screen name="Profile" component={ProfileScreen} options={{ title: 'Ho so' }} />
+      <Tab.Screen name="Home" component={HomeScreen} options={{ title: 'Trang chủ' }} />
+      <Tab.Screen name="Study" component={StudyScreen} options={{ title: 'Học' }} />
+      <Tab.Screen name="Tests" component={TestsScreen} options={{ title: 'Thi thử' }} />
+      <Tab.Screen name="Signs" component={SignsScreen} options={{ title: 'Biển báo' }} />
+      <Tab.Screen name="Profile" component={ProfileScreen} options={{ title: 'Hồ sơ' }} />
     </Tab.Navigator>
   );
 }
@@ -87,7 +87,7 @@ export default function AppNavigator() {
     return (
       <View style={styles.loadingScreen}>
         <ActivityIndicator size="large" color={colors.primary} />
-        <Text style={styles.loadingText}>Dang tai du lieu hoc tap...</Text>
+        <Text style={styles.loadingText}>Đang tải dữ liệu học tập...</Text>
       </View>
     );
   }

@@ -1,4 +1,4 @@
-﻿import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import ScreenContainer from '../components/common/ScreenContainer';
 import PrimaryButton from '../components/common/PrimaryButton';
@@ -16,34 +16,34 @@ export default function ResultScreen({ navigation, route }) {
     <ScreenContainer>
       <View style={[styles.heroCard, { backgroundColor: result.isPassed ? '#dcfce7' : '#fee2e2' }]}>
         <Text style={[styles.heroEyebrow, { color: result.isPassed ? colors.success : colors.danger }]}>
-          {result.isPassed ? 'Dat muc tieu' : 'Can hoc them'}
+          {result.isPassed ? 'Đạt mục tiêu' : 'Cần học thêm'}
         </Text>
-        <Text style={styles.heroTitle}>{result.correctCount}/{result.totalQuestions} cau dung</Text>
-        <Text style={styles.heroBody}>{result.title} • Hang {result.licenseCode} • {result.scoreRate}%</Text>
+        <Text style={styles.heroTitle}>{result.correctCount}/{result.totalQuestions} câu đúng</Text>
+        <Text style={styles.heroBody}>{result.title} • Hạng {result.licenseCode} • {result.scoreRate}%</Text>
       </View>
 
       <View style={styles.metricCard}>
         <View style={styles.metricRow}>
-          <Text style={styles.metricLabel}>Muc tieu</Text>
-          <Text style={styles.metricValue}>{result.targetScore} cau</Text>
+          <Text style={styles.metricLabel}>Mục tiêu</Text>
+          <Text style={styles.metricValue}>{result.targetScore} câu</Text>
         </View>
         <View style={styles.metricRow}>
-          <Text style={styles.metricLabel}>So cau sai</Text>
+          <Text style={styles.metricLabel}>Số câu sai</Text>
           <Text style={styles.metricValue}>{result.incorrectCount}</Text>
         </View>
         <View style={styles.metricRow}>
-          <Text style={styles.metricLabel}>So cau da tra loi</Text>
+          <Text style={styles.metricLabel}>Số câu đã trả lời</Text>
           <Text style={styles.metricValue}>{result.answeredCount}</Text>
         </View>
       </View>
 
       <PrimaryButton
-        label="Lam lai"
+        label="Làm lại"
         icon="refresh"
         onPress={() => navigation.replace('QuestionSession', { ...restartConfig, sessionSeed: Date.now() })}
       />
-      <PrimaryButton label="Xem cau sai" variant="secondary" icon="alert-circle-outline" onPress={() => navigation.navigate('Mistakes')} />
-      <PrimaryButton label="Ve trang chu" variant="ghost" onPress={() => navigation.navigate('MainTabs')} />
+      <PrimaryButton label="Xem câu sai" variant="secondary" icon="alert-circle-outline" onPress={() => navigation.navigate('Mistakes')} />
+      <PrimaryButton label="Về trang chủ" variant="ghost" onPress={() => navigation.navigate('MainTabs')} />
     </ScreenContainer>
   );
 }

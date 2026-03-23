@@ -1,4 +1,4 @@
-﻿import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import ScreenContainer from '../components/common/ScreenContainer';
@@ -25,7 +25,7 @@ export default function LicenseTypeScreen({ navigation }) {
 
   return (
     <ScreenContainer>
-      <SectionTitle title="Chon hang bang" subtitle="Lua chon nay duoc luu va duoc dung cho toan bo bo cau hoi, de thi va thong ke" />
+      <SectionTitle title="Chọn hạng bằng" subtitle="Lựa chọn này được lưu và dùng cho toàn bộ bộ câu hỏi, đề thi và thống kê" />
       {LICENSE_TYPES.map((item) => {
         const isActive = item.id === state.selectedLicenseId;
 
@@ -38,7 +38,7 @@ export default function LicenseTypeScreen({ navigation }) {
             }}
             style={[styles.card, isActive && styles.cardActive]}
           >
-            <View style={[styles.iconWrap, { backgroundColor: `${item.accent}18` }]}> 
+            <View style={[styles.iconWrap, { backgroundColor: `${item.accent}18` }]}>
               <MaterialCommunityIcons name={getLicenseIcon(item.code)} size={26} color={item.accent} />
             </View>
             <View style={styles.copy}>

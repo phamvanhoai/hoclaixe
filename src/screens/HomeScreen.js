@@ -1,4 +1,4 @@
-﻿import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -20,8 +20,8 @@ export default function HomeScreen({ navigation }) {
           <Text style={styles.avatarText}>HL</Text>
         </View>
         <View style={styles.headerCopy}>
-          <Text style={styles.eyebrow}>Hoc lai xe Viet Nam</Text>
-          <Text style={styles.headerTitle}>Dashboard hoc GPLX</Text>
+          <Text style={styles.eyebrow}>Học lái xe Việt Nam</Text>
+          <Text style={styles.headerTitle}>Dashboard học GPLX</Text>
         </View>
         <Pressable style={styles.headerButton} onPress={() => navigation.navigate('LicenseTypes')}>
           <MaterialCommunityIcons name="tune-variant" size={22} color={colors.text} />
@@ -29,66 +29,66 @@ export default function HomeScreen({ navigation }) {
       </View>
 
       <LinearGradient colors={['#0f56b8', '#2f88ff']} style={styles.heroCard}>
-        <Text style={styles.heroLabel}>Hang bang dang hoc</Text>
+        <Text style={styles.heroLabel}>Hạng bằng đang học</Text>
         <View style={styles.heroRow}>
           <View>
             <Text style={styles.heroCode}>{selectedLicense.code}</Text>
             <Text style={styles.heroTitle}>{selectedLicense.title}</Text>
           </View>
           <Pressable onPress={() => navigation.navigate('LicenseTypes')} style={styles.heroChip}>
-            <Text style={styles.heroChipText}>Doi hang</Text>
+            <Text style={styles.heroChipText}>Đổi hạng</Text>
           </Pressable>
         </View>
         <Text style={styles.heroDescription}>{selectedLicense.description}</Text>
       </LinearGradient>
 
       <View style={styles.progressCard}>
-        <SectionTitle title="Tien do tong quan" subtitle={`${stats.answeredCount}/${stats.totalQuestions} cau da lam • Do chinh xac ${stats.accuracy}%`} />
+        <SectionTitle title="Tiến độ tổng quan" subtitle={`${stats.answeredCount}/${stats.totalQuestions} câu đã làm • Độ chính xác ${stats.accuracy}%`} />
         <ProgressMeter value={stats.completionRate} />
         <View style={styles.statRow}>
           <View style={styles.statBox}>
             <Text style={styles.statValue}>{stats.correctCount}</Text>
-            <Text style={styles.statLabel}>Tra loi dung</Text>
+            <Text style={styles.statLabel}>Trả lời đúng</Text>
           </View>
           <View style={styles.statBox}>
             <Text style={styles.statValue}>{stats.mistakeCount}</Text>
-            <Text style={styles.statLabel}>Can on lai</Text>
+            <Text style={styles.statLabel}>Cần ôn lại</Text>
           </View>
           <View style={styles.statBox}>
             <Text style={styles.statValue}>{weeklyActivity}</Text>
-            <Text style={styles.statLabel}>Hoat dong 7 ngay</Text>
+            <Text style={styles.statLabel}>Hoạt động 7 ngày</Text>
           </View>
         </View>
       </View>
 
-      <SectionTitle title="Cong cu hoc nhanh" subtitle="Tat ca deu dong bo voi tien do AsyncStorage cua ban" />
+      <SectionTitle title="Công cụ học nhanh" subtitle="Tất cả đều đồng bộ với tiến độ lưu trên thiết bị" />
       <View style={styles.featureGrid}>
         <FeatureCard
-          title="Thi thu"
-          subtitle={`${selectedLicense.examQuestionCount} cau mo phong`}
+          title="Thi thử"
+          subtitle={`${selectedLicense.examQuestionCount} câu mô phỏng`}
           icon="clipboard-text-clock-outline"
           tint="#e6f0ff"
-          onPress={() => navigation.navigate('QuestionSession', { mode: 'mockTest', title: 'Thi thu mo phong', sessionSeed: Date.now() })}
+          onPress={() => navigation.navigate('QuestionSession', { mode: 'mockTest', title: 'Thi thử mô phỏng', sessionSeed: Date.now() })}
         />
         <FeatureCard
-          title="Hoc theo chu de"
-          subtitle="Chia theo nhom cau hoi de hoc dan"
+          title="Học theo chủ đề"
+          subtitle="Chia theo nhóm câu hỏi để học dần"
           icon="book-open-page-variant-outline"
           tint="#ecfdf5"
           iconColor="#0f766e"
           onPress={() => navigation.navigate('Study')}
         />
         <FeatureCard
-          title="Cau sai"
-          subtitle="Xem lai nhung noi de nham lan"
+          title="Câu sai"
+          subtitle="Xem lại những nội dung dễ nhầm lẫn"
           icon="alert-circle-outline"
           tint="#fff1f2"
           iconColor="#dc2626"
           onPress={() => navigation.navigate('Mistakes')}
         />
         <FeatureCard
-          title="Bien bao"
-          subtitle="Thu vien bien bao hay gap"
+          title="Biển báo"
+          subtitle="Thư viện biển báo hay gặp"
           icon="sign-direction"
           tint="#fff7ed"
           iconColor="#ea580c"
@@ -97,35 +97,35 @@ export default function HomeScreen({ navigation }) {
       </View>
 
       <View style={styles.challengeCard}>
-        <Text style={styles.challengeTitle}>San sang cho buoi thi that?</Text>
+        <Text style={styles.challengeTitle}>Sẵn sàng cho buổi thi thật?</Text>
         <Text style={styles.challengeBody}>
-          Hoan thanh them 3 de thi thu va giu do chinh xac tren 80% de dat muc exam ready.
+          Hoàn thành thêm 3 đề thi thử và giữ độ chính xác trên 80% để đạt mức exam ready.
         </Text>
         <Pressable
           style={styles.challengeButton}
-          onPress={() => navigation.navigate('QuestionSession', { mode: 'mockTest', title: 'Thi thu mo phong', sessionSeed: Date.now() })}
+          onPress={() => navigation.navigate('QuestionSession', { mode: 'mockTest', title: 'Thi thử mô phỏng', sessionSeed: Date.now() })}
         >
-          <Text style={styles.challengeButtonText}>Bat dau de moi</Text>
+          <Text style={styles.challengeButtonText}>Bắt đầu đề mới</Text>
           <MaterialCommunityIcons name="arrow-right" size={18} color={colors.surface} />
         </Pressable>
       </View>
 
-      <SectionTitle title="Thi thu gan day" subtitle="Ket qua de thi thu moi nhat" actionLabel="Trang de thi" onPress={() => navigation.navigate('Tests')} />
+      <SectionTitle title="Thi thử gần đây" subtitle="Kết quả đề thi thử mới nhất" actionLabel="Trang đề thi" onPress={() => navigation.navigate('Tests')} />
       {recentTests.length === 0 ? (
         <View style={styles.emptyCard}>
-          <Text style={styles.emptyTitle}>Chua co de thi nao duoc luu</Text>
-          <Text style={styles.emptyBody}>Lam mot de dau tien de app bat dau theo doi tien do va lich su thi thu.</Text>
+          <Text style={styles.emptyTitle}>Chưa có đề thi nào được lưu</Text>
+          <Text style={styles.emptyBody}>Làm một đề đầu tiên để app bắt đầu theo dõi tiến độ và lịch sử thi thử.</Text>
         </View>
       ) : (
         recentTests.map((item) => (
           <View key={item.id} style={styles.testCard}>
             <View>
               <Text style={styles.testCode}>{item.licenseCode} • {item.title}</Text>
-              <Text style={styles.testMeta}>{item.correctCount}/{item.totalQuestions} cau dung • {item.scoreRate}%</Text>
+              <Text style={styles.testMeta}>{item.correctCount}/{item.totalQuestions} câu đúng • {item.scoreRate}%</Text>
             </View>
             <View style={[styles.resultPill, { backgroundColor: item.isPassed ? '#dcfce7' : '#fee2e2' }]}>
               <Text style={[styles.resultPillText, { color: item.isPassed ? colors.success : colors.danger }]}>
-                {item.isPassed ? 'Dat' : 'Can hoc them'}
+                {item.isPassed ? 'Đạt' : 'Cần học thêm'}
               </Text>
             </View>
           </View>

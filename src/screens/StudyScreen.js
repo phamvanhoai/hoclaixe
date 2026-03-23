@@ -1,4 +1,4 @@
-﻿import { useDeferredValue, useState } from 'react';
+import { useDeferredValue, useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import ScreenContainer from '../components/common/ScreenContainer';
@@ -7,27 +7,27 @@ import EmptyState from '../components/common/EmptyState';
 import CategoryCard from '../components/study/CategoryCard';
 import { colors, radii, spacing } from '../constants/theme';
 import { useAppContext } from '../context/AppContext';
-import { getCategoryProgress } from '../utils/quiz';
+import { getCategoryProgress, normalizeVietnameseText } from '../utils/quiz';
 
 export default function StudyScreen({ navigation }) {
   const { questions, state, stats, selectedLicense, bookmarkedQuestions, mistakeQuestions } = useAppContext();
   const [query, setQuery] = useState('');
-  const deferredQuery = useDeferredValue(query.trim().toLowerCase());
+  const deferredQuery = useDeferredValue(normalizeVietnameseText(query));
 
   const categories = getCategoryProgress(questions, state.questionProgress).filter((item) => {
     if (!deferredQuery) {
       return true;
     }
 
-    return (`${item.title} ${item.description}`).toLowerCase().includes(deferredQuery);
+    return normalizeVietnameseText(`${item.title} ${item.description}`).includes(deferredQuery);
   });
 
   return (
     <ScreenContainer>
       <SectionTitle
-        title="Hoc theo chu de"
-        subtitle={`Hang ${selectedLicense.code} • ${stats.answeredCount}/${stats.totalQuestions} cau da lam`}
-        actionLabel="Doi hang"
+        title="Học theo chủ đề"
+        subtitle={`Hạng ${selectedLicense.code} • ${stats.answeredCount}/${stats.totalQuestions} câu đã làm`}
+        actionLabel="Đổi hạng"
         onPress={() => navigation.navigate('LicenseTypes')}
       />
 
@@ -35,7 +35,7 @@ export default function StudyScreen({ navigation }) {
         <TextInput
           value={query}
           onChangeText={setQuery}
-          placeholder="Tim chu de, quy tac, bien bao..."
+          placeholder="Tìm chủ đề, quy tắc, biển báo..."
           placeholderTextColor={colors.textSoft}
           style={styles.searchInput}
         />
@@ -44,7 +44,7 @@ export default function StudyScreen({ navigation }) {
       <View style={styles.quickRow}>
         <Pressable style={styles.quickCard} onPress={() => navigation.navigate('Mistakes')}>
           <Text style={styles.quickValue}>{mistakeQuestions.length}</Text>
-          <Text style={styles.quickLabel}>Cau sai can on</Text>
+          <Text style={styles.quickLabel}>Câu sai cần ôn</Text>
         </Pressable>
         <Pressable
           style={styles.quickCard}
@@ -53,22 +53,22 @@ export default function StudyScreen({ navigation }) {
               navigation.navigate('QuestionSession', {
                 mode: 'review',
                 questionIds: bookmarkedQuestions.map((item) => item.id),
-                title: 'Cau da danh dau',
+                title: 'Câu đã đánh dấu',
                 sessionSeed: Date.now(),
               });
             }
           }}
         >
           <Text style={styles.quickValue}>{bookmarkedQuestions.length}</Text>
-          <Text style={styles.quickLabel}>Cau da luu</Text>
+          <Text style={styles.quickLabel}>Câu đã lưu</Text>
         </Pressable>
       </View>
 
       {categories.length === 0 ? (
         <EmptyState
           icon="magnify"
-          title="Khong tim thay chu de phu hop"
-          description="Thu doi tu khoa tim kiem hoac xoa bo loc hien tai."
+          title="Không tìm thấy chủ đề phù hợp"
+          description="Thử đổi từ khóa tìm kiếm hoặc xóa bộ lọc hiện tại."
         />
       ) : (
         categories.map((item) => (

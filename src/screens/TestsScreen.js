@@ -1,4 +1,4 @@
-﻿import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import ScreenContainer from '../components/common/ScreenContainer';
 import SectionTitle from '../components/common/SectionTitle';
@@ -14,44 +14,44 @@ export default function TestsScreen({ navigation }) {
   return (
     <ScreenContainer>
       <SectionTitle
-        title="Thi thu mo phong"
-        subtitle={`Hang ${selectedLicense.code} • ${selectedLicense.examQuestionCount} cau / muc tieu ${selectedLicense.targetScore} cau dung`}
+        title="Thi thử mô phỏng"
+        subtitle={`Hạng ${selectedLicense.code} • ${selectedLicense.examQuestionCount} câu / mục tiêu ${selectedLicense.targetScore} câu đúng`}
       />
 
       <View style={styles.heroCard}>
-        <Text style={styles.heroEyebrow}>De thi hien tai</Text>
+        <Text style={styles.heroEyebrow}>Đề thi hiện tại</Text>
         <Text style={styles.heroTitle}>{selectedLicense.code} - {selectedLicense.title}</Text>
         <Text style={styles.heroBody}>{selectedLicense.description}</Text>
         <PrimaryButton
-          label="Bat dau thi thu"
+          label="Bắt đầu thi thử"
           icon="play-circle-outline"
           onPress={() =>
             navigation.navigate('QuestionSession', {
               mode: 'mockTest',
-              title: 'Thi thu mo phong',
+              title: 'Thi thử mô phỏng',
               sessionSeed: Date.now(),
             })
           }
         />
       </View>
 
-      <SectionTitle title="Lich su de thi" subtitle="Ket qua luu bang AsyncStorage tren thiet bi" />
+      <SectionTitle title="Lịch sử đề thi" subtitle="Kết quả lưu trên thiết bị của bạn" />
       {recentTests.length === 0 ? (
         <EmptyState
           icon="clipboard-text-clock-outline"
-          title="Ban chua co de thi nao"
-          description="Sau khi hoan thanh thi thu, ket qua se hien o day de ban theo doi tien bo."
+          title="Bạn chưa có đề thi nào"
+          description="Sau khi hoàn thành thi thử, kết quả sẽ hiện ở đây để bạn theo dõi tiến bộ."
         />
       ) : (
         recentTests.map((item) => (
           <Pressable key={item.id} style={styles.historyCard}>
             <View style={styles.historyCopy}>
               <Text style={styles.historyTitle}>{item.licenseCode} • {item.title}</Text>
-              <Text style={styles.historyMeta}>{item.correctCount}/{item.totalQuestions} cau dung • Muc tieu {item.targetScore}</Text>
+              <Text style={styles.historyMeta}>{item.correctCount}/{item.totalQuestions} câu đúng • Mục tiêu {item.targetScore}</Text>
             </View>
             <View style={[styles.historyPill, { backgroundColor: item.isPassed ? '#dcfce7' : '#fee2e2' }]}>
               <Text style={[styles.historyPillLabel, { color: item.isPassed ? colors.success : colors.danger }]}>
-                {item.isPassed ? 'Dat' : 'Chua dat'}
+                {item.isPassed ? 'Đạt' : 'Chưa đạt'}
               </Text>
             </View>
           </Pressable>

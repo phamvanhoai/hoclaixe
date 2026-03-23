@@ -1,4 +1,4 @@
-﻿import Storage from 'expo-sqlite/kv-store';
+import Storage from 'expo-sqlite/kv-store';
 
 const APP_STATE_KEY = '@hoclaixe/app-state';
 
@@ -11,7 +11,7 @@ export async function loadAppState() {
 
     return JSON.parse(raw);
   } catch (error) {
-    console.warn('Khong the doc du lieu app:', error);
+    console.warn('Không thể đọc dữ liệu app:', error);
     return null;
   }
 }
@@ -20,6 +20,6 @@ export async function saveAppState(value) {
   try {
     await Storage.setItem(APP_STATE_KEY, JSON.stringify(value));
   } catch (error) {
-    console.warn('Khong the luu du lieu app:', error);
+    console.warn('Không thể lưu dữ liệu app:', error);
   }
 }

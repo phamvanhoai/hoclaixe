@@ -1,5 +1,5 @@
-﻿import { useDeferredValue, useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { useDeferredValue, useState } from 'react';
+import { StyleSheet, TextInput, View } from 'react-native';
 
 import ScreenContainer from '../components/common/ScreenContainer';
 import SectionTitle from '../components/common/SectionTitle';
@@ -7,27 +7,28 @@ import EmptyState from '../components/common/EmptyState';
 import SignCard from '../components/signs/SignCard';
 import { colors, radii, spacing } from '../constants/theme';
 import { ROAD_SIGNS } from '../data/signs';
+import { normalizeVietnameseText } from '../utils/quiz';
 
 export default function SignsScreen() {
   const [query, setQuery] = useState('');
-  const deferredQuery = useDeferredValue(query.trim().toLowerCase());
+  const deferredQuery = useDeferredValue(normalizeVietnameseText(query));
 
   const signs = ROAD_SIGNS.filter((item) => {
     if (!deferredQuery) {
       return true;
     }
 
-    return (`${item.code} ${item.name} ${item.group} ${item.meaning}`).toLowerCase().includes(deferredQuery);
+    return normalizeVietnameseText(`${item.code} ${item.name} ${item.group} ${item.meaning}`).includes(deferredQuery);
   });
 
   return (
     <ScreenContainer>
-      <SectionTitle title="Thu vien bien bao" subtitle="Tra nhanh cac bien bao co ban thuong gap trong de ly thuyet" />
+      <SectionTitle title="Thư viện biển báo" subtitle="Tra nhanh các biển báo cơ bản thường gặp trong đề lý thuyết" />
       <View style={styles.searchWrap}>
         <TextInput
           value={query}
           onChangeText={setQuery}
-          placeholder="Tim ma bien, ten bien, nhom bien..."
+          placeholder="Tìm mã biển, tên biển, nhóm biển..."
           placeholderTextColor={colors.textSoft}
           style={styles.searchInput}
         />
@@ -35,8 +36,8 @@ export default function SignsScreen() {
       {signs.length === 0 ? (
         <EmptyState
           icon="sign-direction-remove"
-          title="Khong co bien bao phu hop"
-          description="Thu doi tu khoa de tim nhanh ma bien hoac nhom bien."
+          title="Không có biển báo phù hợp"
+          description="Thử đổi từ khóa để tìm nhanh mã biển hoặc nhóm biển."
         />
       ) : (
         signs.map((item) => <SignCard key={item.id} sign={item} />)

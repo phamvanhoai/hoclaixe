@@ -1,4 +1,4 @@
-﻿import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import ScreenContainer from '../components/common/ScreenContainer';
 import SectionTitle from '../components/common/SectionTitle';
@@ -13,35 +13,35 @@ export default function MistakesScreen({ navigation }) {
 
   return (
     <ScreenContainer>
-      <SectionTitle title="On lai cau sai" subtitle="Tap trung vao cac cau da tra loi sai va nhung cau ban da danh dau" />
+      <SectionTitle title="Ôn lại câu sai" subtitle="Tập trung vào các câu đã trả lời sai và những câu bạn đã đánh dấu" />
 
       <View style={styles.summaryRow}>
         <View style={styles.summaryCard}>
           <Text style={styles.summaryValue}>{mistakeQuestions.length}</Text>
-          <Text style={styles.summaryLabel}>Cau sai hien tai</Text>
+          <Text style={styles.summaryLabel}>Câu sai hiện tại</Text>
         </View>
         <View style={styles.summaryCard}>
           <Text style={styles.summaryValue}>{bookmarkedQuestions.length}</Text>
-          <Text style={styles.summaryLabel}>Cau danh dau</Text>
+          <Text style={styles.summaryLabel}>Câu đánh dấu</Text>
         </View>
       </View>
 
       {mistakeQuestions.length === 0 ? (
         <EmptyState
           icon="party-popper"
-          title="Ban chua co cau sai nao"
-          description="Lam them bai hoc va de thi thu. Moi cau sai se tu dong duoc them vao danh sach nay."
+          title="Bạn chưa có câu sai nào"
+          description="Làm thêm bài học và đề thi thử. Mỗi câu sai sẽ tự động được thêm vào danh sách này."
         />
       ) : (
         <>
           <PrimaryButton
-            label="Bat dau on toan bo cau sai"
+            label="Bắt đầu ôn toàn bộ câu sai"
             icon="play"
             onPress={() =>
               navigation.navigate('QuestionSession', {
                 mode: 'review',
                 questionIds: mistakeQuestions.map((item) => item.id),
-                title: 'On lai cau sai',
+                title: 'Ôn lại câu sai',
                 sessionSeed: Date.now(),
               })
             }
@@ -57,13 +57,13 @@ export default function MistakesScreen({ navigation }) {
                   navigation.navigate('QuestionSession', {
                     mode: 'review',
                     questionIds: [item.id],
-                    title: `Cau sai #${index + 1}`,
+                    title: `Câu sai #${index + 1}`,
                     sessionSeed: Date.now(),
                   })
                 }
               >
                 <Text style={styles.questionTitle}>{item.question}</Text>
-                <Text style={styles.questionMeta}>{category?.title ?? 'Chu de'} • Cham de hoc lai nhanh</Text>
+                <Text style={styles.questionMeta}>{category?.title ?? 'Chủ đề'} • Chạm để học lại nhanh</Text>
               </Pressable>
             );
           })}

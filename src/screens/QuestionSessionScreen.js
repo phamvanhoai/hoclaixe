@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -66,7 +66,7 @@ export default function QuestionSessionScreen({ navigation, route }) {
   const mode = route.params?.mode ?? 'practice';
   const categoryId = route.params?.categoryId ?? null;
   const questionIds = route.params?.questionIds ?? null;
-  const title = route.params?.title ?? 'Hoc cau hoi';
+  const title = route.params?.title ?? 'Học câu hỏi';
   const sessionSeed = route.params?.sessionSeed;
 
   const [sessionQuestions, setSessionQuestions] = useState([]);
@@ -113,10 +113,10 @@ export default function QuestionSessionScreen({ navigation, route }) {
       <ScreenContainer>
         <EmptyState
           icon="book-off-outline"
-          title="Khong co cau hoi cho lua chon nay"
-          description="Hay doi hang bang, doi chu de hoac lam them de tao du lieu hoc."
+          title="Không có câu hỏi cho lựa chọn này"
+          description="Hãy đổi hạng bằng, đổi chủ đề hoặc làm thêm để tạo dữ liệu học."
         />
-        <PrimaryButton label="Quay lai" variant="secondary" onPress={() => navigation.goBack()} />
+        <PrimaryButton label="Quay lại" variant="secondary" onPress={() => navigation.goBack()} />
       </ScreenContainer>
     );
   }
@@ -147,7 +147,7 @@ export default function QuestionSessionScreen({ navigation, route }) {
 
   function handleCheckAnswer() {
     if (!selectedOptionId) {
-      Alert.alert('Chua chon dap an', 'Ban hay chon mot phuong an truoc khi kiem tra.');
+      Alert.alert('Chưa chọn đáp án', 'Bạn hãy chọn một phương án trước khi kiểm tra.');
       return;
     }
 
@@ -219,7 +219,7 @@ export default function QuestionSessionScreen({ navigation, route }) {
         </Pressable>
         <View style={styles.headerCopy}>
           <Text style={styles.headerTitle}>{title}</Text>
-          <Text style={styles.headerSubtitle}>Cau {currentIndex + 1}/{sessionQuestions.length}</Text>
+          <Text style={styles.headerSubtitle}>Câu {currentIndex + 1}/{sessionQuestions.length}</Text>
         </View>
         <Pressable onPress={() => toggleBookmark(currentQuestion.id)} style={styles.headerButton}>
           <MaterialCommunityIcons
@@ -232,23 +232,23 @@ export default function QuestionSessionScreen({ navigation, route }) {
 
       <View style={styles.progressCard}>
         <View style={styles.progressRow}>
-          <Text style={styles.progressLabel}>{mode === 'mockTest' ? 'De thi thu' : 'Phien hoc'}</Text>
+          <Text style={styles.progressLabel}>{mode === 'mockTest' ? 'Đề thi thử' : 'Phiên học'}</Text>
           <Text style={styles.progressValue}>{progress}%</Text>
         </View>
         <ProgressMeter value={progress} />
         {mode === 'mockTest' ? (
-          <Text style={styles.progressHint}>Muc tieu mo phong: {targetScore}/{sessionQuestions.length} va khong sai cau liet.</Text>
+          <Text style={styles.progressHint}>Mục tiêu mô phỏng: {targetScore}/{sessionQuestions.length} và không sai câu liệt.</Text>
         ) : null}
       </View>
 
       <View style={styles.questionCard}>
         <View style={styles.badgeRow}>
-          <View style={[styles.badge, { backgroundColor: `${category?.accent ?? colors.primary}18` }]}> 
-            <Text style={[styles.badgeText, { color: category?.accent ?? colors.primary }]}>{category?.title ?? 'Cau hoi'}</Text>
+          <View style={[styles.badge, { backgroundColor: `${category?.accent ?? colors.primary}18` }]}>
+            <Text style={[styles.badgeText, { color: category?.accent ?? colors.primary }]}>{category?.title ?? 'Câu hỏi'}</Text>
           </View>
           {currentQuestion.isCritical ? (
-            <View style={[styles.badge, { backgroundColor: '#fee2e2' }]}> 
-              <Text style={[styles.badgeText, { color: colors.danger }]}>Cau liet</Text>
+            <View style={[styles.badge, { backgroundColor: '#fee2e2' }]}>
+              <Text style={[styles.badgeText, { color: colors.danger }]}>Câu liệt</Text>
             </View>
           ) : null}
         </View>
@@ -276,7 +276,7 @@ export default function QuestionSessionScreen({ navigation, route }) {
       {revealed ? (
         <View style={styles.explanationCard}>
           <Text style={styles.explanationTitle}>
-            {answers[currentQuestion.id]?.isCorrect ? 'Chinh xac' : 'Can ghi nho'}
+            {answers[currentQuestion.id]?.isCorrect ? 'Chính xác' : 'Cần ghi nhớ'}
           </Text>
           <Text style={styles.explanationBody}>{currentQuestion.explanation}</Text>
         </View>
@@ -284,10 +284,10 @@ export default function QuestionSessionScreen({ navigation, route }) {
 
       <View style={styles.actionRow}>
         {!revealed ? (
-          <PrimaryButton label="Kiem tra dap an" icon="check-circle-outline" onPress={handleCheckAnswer} />
+          <PrimaryButton label="Kiểm tra đáp án" icon="check-circle-outline" onPress={handleCheckAnswer} />
         ) : (
           <PrimaryButton
-            label={currentIndex === sessionQuestions.length - 1 ? 'Hoan thanh' : 'Cau tiep theo'}
+            label={currentIndex === sessionQuestions.length - 1 ? 'Hoàn thành' : 'Câu tiếp theo'}
             icon={currentIndex === sessionQuestions.length - 1 ? 'flag-checkered' : 'arrow-right'}
             onPress={handleNext}
           />

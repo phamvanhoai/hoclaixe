@@ -1,5 +1,15 @@
-﻿import { QUESTION_BANK, QUESTION_CATEGORIES } from '../data/questions';
+import { QUESTION_BANK, QUESTION_CATEGORIES } from '../data/questions';
 import { ROAD_SIGNS } from '../data/signs';
+
+export function normalizeVietnameseText(value = '') {
+  return value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd')
+    .replace(/Đ/g, 'D')
+    .toLowerCase()
+    .trim();
+}
 
 export function shuffleArray(items) {
   const nextItems = [...items];

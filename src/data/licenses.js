@@ -1,9 +1,9 @@
-﻿export const LICENSE_TYPES = [
+export const LICENSE_TYPES = [
   {
     id: 'a1',
     code: 'A1',
-    title: 'Xe mo to duoi 175cc',
-    description: 'Tap trung cac cau hoi co ban cho nguoi hoc lai xe may.',
+    title: 'Xe mô tô dưới 175cc',
+    description: 'Tập trung các câu hỏi cơ bản cho người học lái xe máy.',
     examQuestionCount: 25,
     targetScore: 21,
     questionPool: 250,
@@ -12,8 +12,8 @@
   {
     id: 'a',
     code: 'A',
-    title: 'Xe mo to tu 175cc tro len',
-    description: 'Bo cau hoi mo rong cho xe mo to phan khoi lon.',
+    title: 'Xe mô tô từ 175cc trở lên',
+    description: 'Bộ câu hỏi mở rộng cho xe mô tô phân khối lớn.',
     examQuestionCount: 25,
     targetScore: 23,
     questionPool: 250,
@@ -22,8 +22,8 @@
   {
     id: 'b',
     code: 'B',
-    title: 'O to con va xe tai nhe',
-    description: 'Nhom hoc vien pho bien nhat khi thi GPLX o to.',
+    title: 'Ô tô con và xe tải nhẹ',
+    description: 'Nhóm học viên phổ biến nhất khi thi GPLX ô tô.',
     examQuestionCount: 30,
     targetScore: 27,
     questionPool: 600,
@@ -32,8 +32,8 @@
   {
     id: 'c1',
     code: 'C1',
-    title: 'Xe tai trung va xe chuyen dung nho',
-    description: 'Cau hoi nang hon ve quy tac, ky thuat va an toan.',
+    title: 'Xe tải trung và xe chuyên dùng nhỏ',
+    description: 'Câu hỏi nặng hơn về quy tắc, kỹ thuật và an toàn.',
     examQuestionCount: 35,
     targetScore: 32,
     questionPool: 600,
@@ -42,8 +42,8 @@
   {
     id: 'c',
     code: 'C',
-    title: 'Xe tai lon va dau keo',
-    description: 'Mo phong de ly thuyet cho tai xe van tai hang nang.',
+    title: 'Xe tải lớn và đầu kéo',
+    description: 'Mô phỏng đề lý thuyết cho tài xế vận tải hạng nặng.',
     examQuestionCount: 40,
     targetScore: 36,
     questionPool: 600,
@@ -52,8 +52,8 @@
   {
     id: 'd1',
     code: 'D1',
-    title: 'Xe cho nguoi 9-16 cho',
-    description: 'Tap trung them vao quy tac va trach nhiem van tai hanh khach.',
+    title: 'Xe chở người 9-16 chỗ',
+    description: 'Tập trung thêm vào quy tắc và trách nhiệm vận tải hành khách.',
     examQuestionCount: 45,
     targetScore: 41,
     questionPool: 600,

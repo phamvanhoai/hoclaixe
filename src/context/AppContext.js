@@ -16,7 +16,7 @@ const initialState = {
   hasHydrated: false,
   selectedLicenseId: DEFAULT_LICENSE_ID,
   profile: {
-    name: 'Hoc vien moi',
+    name: 'Học viên mới',
     learnerId: 'GPLX-2026-001',
     memberSince: '03/2026',
   },
@@ -205,7 +205,7 @@ export function useAppContext() {
   const context = useContext(AppContext);
 
   if (!context) {
-    throw new Error('useAppContext phai duoc dung trong AppProvider');
+    throw new Error('useAppContext phải được dùng trong AppProvider');
   }
 
   return context;
