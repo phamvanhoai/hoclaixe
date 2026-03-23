@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import ScreenContainer from '../components/common/ScreenContainer';
@@ -71,6 +71,7 @@ export default function QuestionSessionScreen({ navigation, route }) {
 
   const [sessionQuestions, setSessionQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
+  const [draftSelections, setDraftSelections] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOptionId, setSelectedOptionId] = useState(null);
   const [revealed, setRevealed] = useState(false);
@@ -90,6 +91,7 @@ export default function QuestionSessionScreen({ navigation, route }) {
 
     setSessionQuestions(nextQuestions);
     setAnswers({});
+    setDraftSelections({});
     setCurrentIndex(0);
     setSelectedOptionId(null);
     setRevealed(false);
@@ -102,9 +104,10 @@ export default function QuestionSessionScreen({ navigation, route }) {
     }
 
     const existingAnswer = answers[currentQuestion.id];
-    setSelectedOptionId(existingAnswer?.selectedOptionId ?? null);
+    const existingDraft = draftSelections[currentQuestion.id];
+    setSelectedOptionId(existingAnswer?.selectedOptionId ?? existingDraft ?? null);
     setRevealed(Boolean(existingAnswer));
-  }, [currentIndex, sessionQuestions, answers]);
+  }, [currentIndex, sessionQuestions, answers, draftSelections]);
 
   const currentQuestion = sessionQuestions[currentIndex];
 
@@ -127,6 +130,7 @@ export default function QuestionSessionScreen({ navigation, route }) {
     ? Math.max(1, Math.round((sessionQuestions.length * selectedLicense.targetScore) / selectedLicense.examQuestionCount))
     : sessionQuestions.length;
   const progress = Math.round(((currentIndex + 1) / sessionQuestions.length) * 100);
+  const answeredCount = Object.keys(answers).length;
   const isBookmarked = state.bookmarkedQuestionIds.includes(currentQuestion.id);
 
   function getOptionState(optionId) {
@@ -145,6 +149,18 @@ export default function QuestionSessionScreen({ navigation, route }) {
     return 'default';
   }
 
+  function handleSelectOption(optionId) {
+    if (revealed) {
+      return;
+    }
+
+    setSelectedOptionId(optionId);
+    setDraftSelections((currentDrafts) => ({
+      ...currentDrafts,
+      [currentQuestion.id]: optionId,
+    }));
+  }
+
   function handleCheckAnswer() {
     if (!selectedOptionId) {
       Alert.alert('Chưa chọn đáp án', 'Bạn hãy chọn một phương án trước khi kiểm tra.');
@@ -161,6 +177,11 @@ export default function QuestionSessionScreen({ navigation, route }) {
     };
 
     setAnswers(nextAnswers);
+    setDraftSelections((currentDrafts) => {
+      const nextDrafts = { ...currentDrafts };
+      delete nextDrafts[currentQuestion.id];
+      return nextDrafts;
+    });
     recordAnswer({
       questionId: currentQuestion.id,
       selectedOptionId,
@@ -241,6 +262,46 @@ export default function QuestionSessionScreen({ navigation, route }) {
         ) : null}
       </View>
 
+      <View style={styles.progressSection}>
+        <View style={styles.progressSectionHeader}>
+          <Text style={styles.progressSectionTitle}>Progress</Text>
+          <View style={styles.progressAnsweredPill}>
+            <Text style={styles.progressAnsweredText}>{answeredCount} đã trả lời</Text>
+          </View>
+        </View>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.progressList}>
+          {sessionQuestions.map((question, index) => {
+            const isCurrent = index === currentIndex;
+            const isAnswered = Boolean(answers[question.id]);
+            const hasDraft = Boolean(draftSelections[question.id]) && !isAnswered;
+
+            return (
+              <Pressable
+                key={question.id}
+                onPress={() => setCurrentIndex(index)}
+                style={[
+                  styles.progressItem,
+                  isAnswered && styles.progressItemAnswered,
+                  isCurrent && styles.progressItemCurrent,
+                  hasDraft && styles.progressItemDraft,
+                ]}
+              >
+                <Text
+                  style={[
+                    styles.progressItemText,
+                    isAnswered && styles.progressItemTextAnswered,
+                    isCurrent && styles.progressItemTextCurrent,
+                    hasDraft && styles.progressItemTextDraft,
+                  ]}
+                >
+                  {index + 1}
+                </Text>
+              </Pressable>
+            );
+          })}
+        </ScrollView>
+      </View>
+
       <View style={styles.questionCard}>
         <View style={styles.badgeRow}>
           <View style={[styles.badge, { backgroundColor: `${category?.accent ?? colors.primary}18` }]}>
@@ -268,7 +329,7 @@ export default function QuestionSessionScreen({ navigation, route }) {
             key={option.id}
             option={option}
             state={getOptionState(option.id)}
-            onPress={() => !revealed && setSelectedOptionId(option.id)}
+            onPress={() => handleSelectOption(option.id)}
           />
         ))}
       </View>
@@ -354,6 +415,80 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     fontSize: 13,
     lineHeight: 18,
+  },
+  progressSection: {
+    backgroundColor: colors.surface,
+    borderRadius: radii.lg,
+    borderWidth: 1,
+    borderColor: colors.border,
+    paddingVertical: spacing.md,
+    gap: spacing.sm,
+  },
+  progressSectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: spacing.md,
+    paddingHorizontal: spacing.md,
+  },
+  progressSectionTitle: {
+    fontSize: 12,
+    fontWeight: '800',
+    textTransform: 'uppercase',
+    color: colors.textSoft,
+    letterSpacing: 0.6,
+  },
+  progressAnsweredPill: {
+    borderRadius: radii.pill,
+    backgroundColor: colors.primaryMuted,
+    paddingHorizontal: spacing.md,
+    paddingVertical: 8,
+  },
+  progressAnsweredText: {
+    fontSize: 11,
+    fontWeight: '800',
+    color: colors.primary,
+  },
+  progressList: {
+    paddingHorizontal: spacing.md,
+    gap: spacing.sm,
+  },
+  progressItem: {
+    width: 42,
+    height: 42,
+    borderRadius: 14,
+    borderWidth: 1.5,
+    borderColor: colors.border,
+    backgroundColor: colors.surface,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  progressItemAnswered: {
+    borderColor: colors.primary,
+    backgroundColor: colors.primary,
+  },
+  progressItemCurrent: {
+    borderColor: colors.primary,
+    borderWidth: 2,
+    backgroundColor: '#eff6ff',
+  },
+  progressItemDraft: {
+    borderColor: '#93c5fd',
+    backgroundColor: '#eff6ff',
+  },
+  progressItemText: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: colors.textSoft,
+  },
+  progressItemTextAnswered: {
+    color: colors.surface,
+  },
+  progressItemTextCurrent: {
+    color: colors.primary,
+  },
+  progressItemTextDraft: {
+    color: colors.primary,
   },
   questionCard: {
     backgroundColor: colors.surface,

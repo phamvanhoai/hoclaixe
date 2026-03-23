@@ -2,7 +2,7 @@ export const LICENSE_TYPES = [
   {
     id: 'a1',
     code: 'A1',
-    title: 'Xe mô tô dưới 175cc',
+    title: 'Xe mô tô dưới 125cc',
     description: 'Tập trung các câu hỏi cơ bản cho người học lái xe máy.',
     examQuestionCount: 25,
     targetScore: 21,
@@ -12,7 +12,7 @@ export const LICENSE_TYPES = [
   {
     id: 'a',
     code: 'A',
-    title: 'Xe mô tô từ 175cc trở lên',
+    title: 'Xe mô tô từ 125cc trở lên',
     description: 'Bộ câu hỏi mở rộng cho xe mô tô phân khối lớn.',
     examQuestionCount: 25,
     targetScore: 23,
