@@ -7,6 +7,7 @@ import EmptyState from '../components/common/EmptyState';
 import PrimaryButton from '../components/common/PrimaryButton';
 import ProgressMeter from '../components/common/ProgressMeter';
 import QuestionOption from '../components/quiz/QuestionOption';
+import SignPreview from '../components/signs/SignPreview';
 import { colors, radii, spacing } from '../constants/theme';
 import { useAppContext } from '../context/AppContext';
 import {
@@ -316,9 +317,12 @@ export default function QuestionSessionScreen({ navigation, route }) {
         <Text style={styles.questionText}>{currentQuestion.question}</Text>
         {sign ? (
           <View style={styles.signCard}>
-            <Text style={[styles.signCode, { color: sign.accent }]}>{sign.code}</Text>
-            <Text style={styles.signName}>{sign.name}</Text>
-            <Text style={styles.signMeaning}>{sign.meaning}</Text>
+            <SignPreview sign={sign} size={96} />
+            <View style={styles.signCopy}>
+              <Text style={[styles.signCode, { color: sign.accent }]}>{sign.code}</Text>
+              <Text style={styles.signName}>{sign.name}</Text>
+              <Text style={styles.signMeaning}>{sign.meaning}</Text>
+            </View>
           </View>
         ) : null}
       </View>
@@ -522,6 +526,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surfaceMuted,
     borderRadius: radii.md,
     padding: spacing.lg,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
+  },
+  signCopy: {
+    flex: 1,
     gap: 4,
   },
   signCode: {

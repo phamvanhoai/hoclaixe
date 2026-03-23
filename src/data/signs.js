@@ -5,7 +5,7 @@ export const ROAD_SIGNS = [
     name: 'Cấm đi ngược chiều',
     group: 'Cấm',
     meaning: 'Cấm tất cả các phương tiện đi vào theo hướng đặt biển.',
-    accent: '#dc2626',
+    accent: '#dc2626'
   },
   {
     id: 'sign-no-turn-left',
@@ -13,7 +13,7 @@ export const ROAD_SIGNS = [
     name: 'Cấm rẽ trái',
     group: 'Cấm',
     meaning: 'Không được chuyển hướng sang bên trái tại vị trí đặt biển.',
-    accent: '#dc2626',
+    accent: '#dc2626'
   },
   {
     id: 'sign-speed-limit',
@@ -21,7 +21,7 @@ export const ROAD_SIGNS = [
     name: 'Tốc độ tối đa 50 km/h',
     group: 'Cấm',
     meaning: 'Người lái xe không được vượt quá tốc độ ghi trên biển.',
-    accent: '#dc2626',
+    accent: '#dc2626'
   },
   {
     id: 'sign-roundabout',
@@ -29,7 +29,7 @@ export const ROAD_SIGNS = [
     name: 'Nơi giao nhau chạy vòng xuyến',
     group: 'Hiệu lệnh',
     meaning: 'Phương tiện đi theo hướng mũi tên vòng quanh đảo giao thông.',
-    accent: '#136dec',
+    accent: '#136dec'
   },
   {
     id: 'sign-straight',
@@ -37,7 +37,7 @@ export const ROAD_SIGNS = [
     name: 'Hướng đi phải theo',
     group: 'Hiệu lệnh',
     meaning: 'Người điều khiển chỉ được đi thẳng theo hướng biển báo.',
-    accent: '#136dec',
+    accent: '#136dec'
   },
   {
     id: 'sign-pedestrian',
@@ -45,7 +45,7 @@ export const ROAD_SIGNS = [
     name: 'Đường người đi bộ cắt ngang',
     group: 'Cảnh báo',
     meaning: 'Cần giảm tốc độ, chú ý quan sát người đi bộ.',
-    accent: '#f59e0b',
+    accent: '#f59e0b'
   },
   {
     id: 'sign-school',
@@ -53,7 +53,7 @@ export const ROAD_SIGNS = [
     name: 'Trẻ em',
     group: 'Cảnh báo',
     meaning: 'Khu vực gần trường học, cần giảm tốc và nhường đường.',
-    accent: '#f59e0b',
+    accent: '#f59e0b'
   },
   {
     id: 'sign-parking',
@@ -61,7 +61,7 @@ export const ROAD_SIGNS = [
     name: 'Nơi đỗ xe',
     group: 'Chỉ dẫn',
     meaning: 'Khu vực được phép đỗ xe theo quy định.',
-    accent: '#0891b2',
+    accent: '#0891b2'
   },
   {
     id: 'sign-hospital',
@@ -69,14 +69,14 @@ export const ROAD_SIGNS = [
     name: 'Bệnh viện',
     group: 'Chỉ dẫn',
     meaning: 'Gần cơ sở y tế, cần hạn chế bấm còi và giữ an toàn.',
-    accent: '#0891b2',
+    accent: '#0891b2'
   },
   {
     id: 'sign-stop',
-    code: 'P.122',
+    code: 'R.122',
     name: 'Dừng lại',
-    group: 'Cấm',
-    meaning: 'Bắt buộc dừng xe trước vạch dừng hoặc trước vị trí giao nhau.',
-    accent: '#dc2626',
-  },
+    group: 'Hiệu lệnh',
+    meaning: 'Buộc người điều khiển phương tiện phải dừng hẳn trước vạch dừng hoặc trước vị trí giao nhau để quan sát.',
+    accent: '#dc2626'
+  }
 ];
