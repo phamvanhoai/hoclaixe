@@ -48,6 +48,7 @@ export default function StudyScreen({ navigation }) {
           navigation.navigate('QuestionSession', {
             mode: 'practice',
             title: 'Học toàn bộ câu hỏi',
+            resumeFromProgress: true,
             sessionSeed: Date.now(),
           })
         }

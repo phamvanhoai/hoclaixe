@@ -18,6 +18,37 @@ import {
   shuffleArray,
 } from '../utils/quiz';
 
+function getResumeAnswers(questions, progressMap) {
+  return questions.reduce((result, question) => {
+    const savedAnswer = progressMap[question.id];
+
+    if (savedAnswer) {
+      result[question.id] = {
+        selectedOptionId: savedAnswer.selectedOptionId,
+        isCorrect: savedAnswer.isCorrect,
+      };
+    }
+
+    return result;
+  }, {});
+}
+
+function getResumeIndex(questions, progressMap) {
+  const firstUnansweredIndex = questions.findIndex((question) => !progressMap[question.id]);
+
+  if (firstUnansweredIndex >= 0) {
+    return firstUnansweredIndex;
+  }
+
+  const firstWrongIndex = questions.findIndex((question) => progressMap[question.id] && !progressMap[question.id].isCorrect);
+
+  if (firstWrongIndex >= 0) {
+    return firstWrongIndex;
+  }
+
+  return 0;
+}
+
 function buildMockTestQuestions(questions, limit) {
   const target = Math.min(limit, questions.length);
   const chosen = [];
@@ -69,6 +100,7 @@ export default function QuestionSessionScreen({ navigation, route }) {
   const questionIds = route.params?.questionIds ?? null;
   const title = route.params?.title ?? 'Học câu hỏi';
   const sessionSeed = route.params?.sessionSeed;
+  const resumeFromProgress = Boolean(route.params?.resumeFromProgress);
 
   const [sessionQuestions, setSessionQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
@@ -90,13 +122,33 @@ export default function QuestionSessionScreen({ navigation, route }) {
       nextQuestions = buildMockTestQuestions(nextQuestions, selectedLicense.examQuestionCount);
     }
 
+    const shouldResumeFromProgress = resumeFromProgress
+      && mode === 'practice'
+      && !categoryId
+      && !questionIds?.length;
+    const restoredAnswers = shouldResumeFromProgress
+      ? getResumeAnswers(nextQuestions, state.questionProgress)
+      : {};
+    const initialIndex = shouldResumeFromProgress
+      ? getResumeIndex(nextQuestions, state.questionProgress)
+      : 0;
+
     setSessionQuestions(nextQuestions);
-    setAnswers({});
+    setAnswers(restoredAnswers);
     setDraftSelections({});
-    setCurrentIndex(0);
+    setCurrentIndex(initialIndex);
     setSelectedOptionId(null);
     setRevealed(false);
-  }, [questions, mode, categoryId, questionIds?.join('|'), selectedLicense.examQuestionCount, sessionSeed]);
+  }, [
+    questions,
+    mode,
+    categoryId,
+    questionIds?.join('|'),
+    selectedLicense.examQuestionCount,
+    sessionSeed,
+    resumeFromProgress,
+    state.hasHydrated,
+  ]);
 
   useEffect(() => {
     const currentQuestion = sessionQuestions[currentIndex];
@@ -130,8 +182,10 @@ export default function QuestionSessionScreen({ navigation, route }) {
   const targetScore = mode === 'mockTest'
     ? Math.max(1, Math.round((sessionQuestions.length * selectedLicense.targetScore) / selectedLicense.examQuestionCount))
     : sessionQuestions.length;
-  const progress = Math.round(((currentIndex + 1) / sessionQuestions.length) * 100);
   const answeredCount = Object.keys(answers).length;
+  const progress = sessionQuestions.length === 0
+    ? 0
+    : Math.round((answeredCount / sessionQuestions.length) * 100);
   const isBookmarked = state.bookmarkedQuestionIds.includes(currentQuestion.id);
 
   function getOptionState(optionId) {
@@ -148,6 +202,25 @@ export default function QuestionSessionScreen({ navigation, route }) {
     }
 
     return 'default';
+  }
+
+  function getProgressItemState(questionId, index) {
+    const answer = answers[questionId];
+    const isCurrent = index === currentIndex;
+
+    if (answer?.isCorrect) {
+      return isCurrent ? 'correctCurrent' : 'correct';
+    }
+
+    if (answer && !answer.isCorrect) {
+      return isCurrent ? 'wrongCurrent' : 'wrong';
+    }
+
+    if (draftSelections[questionId]) {
+      return isCurrent ? 'draftCurrent' : 'draft';
+    }
+
+    return isCurrent ? 'current' : 'default';
   }
 
   function handleSelectOption(optionId) {
@@ -272,9 +345,7 @@ export default function QuestionSessionScreen({ navigation, route }) {
         </View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.progressList}>
           {sessionQuestions.map((question, index) => {
-            const isCurrent = index === currentIndex;
-            const isAnswered = Boolean(answers[question.id]);
-            const hasDraft = Boolean(draftSelections[question.id]) && !isAnswered;
+            const progressState = getProgressItemState(question.id, index);
 
             return (
               <Pressable
@@ -282,17 +353,33 @@ export default function QuestionSessionScreen({ navigation, route }) {
                 onPress={() => setCurrentIndex(index)}
                 style={[
                   styles.progressItem,
-                  isAnswered && styles.progressItemAnswered,
-                  isCurrent && styles.progressItemCurrent,
-                  hasDraft && styles.progressItemDraft,
+                  (progressState === 'correct' || progressState === 'correctCurrent')
+                    && styles.progressItemAnswered,
+                  (progressState === 'wrong' || progressState === 'wrongCurrent')
+                    && styles.progressItemWrong,
+                  (progressState === 'draft' || progressState === 'draftCurrent')
+                    && styles.progressItemDraft,
+                  (progressState === 'current'
+                    || progressState === 'correctCurrent'
+                    || progressState === 'wrongCurrent'
+                    || progressState === 'draftCurrent')
+                    && styles.progressItemCurrent,
+                  progressState === 'current' && styles.progressItemCurrentDefault,
+                  progressState === 'correctCurrent' && styles.progressItemCurrentAnswered,
+                  progressState === 'wrongCurrent' && styles.progressItemCurrentWrong,
+                  progressState === 'draftCurrent' && styles.progressItemCurrentDraft,
                 ]}
               >
                 <Text
                   style={[
                     styles.progressItemText,
-                    isAnswered && styles.progressItemTextAnswered,
-                    isCurrent && styles.progressItemTextCurrent,
-                    hasDraft && styles.progressItemTextDraft,
+                    (progressState === 'correct' || progressState === 'correctCurrent')
+                      && styles.progressItemTextAnswered,
+                    (progressState === 'wrong' || progressState === 'wrongCurrent')
+                      && styles.progressItemTextWrong,
+                    progressState === 'current' && styles.progressItemTextCurrent,
+                    (progressState === 'draft' || progressState === 'draftCurrent')
+                      && styles.progressItemTextDraft,
                   ]}
                 >
                   {index + 1}
@@ -471,14 +558,30 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
     backgroundColor: colors.primary,
   },
+  progressItemWrong: {
+    borderColor: colors.danger,
+    backgroundColor: '#fee2e2',
+  },
   progressItemCurrent: {
-    borderColor: colors.primary,
     borderWidth: 2,
+  },
+  progressItemCurrentDefault: {
+    borderColor: colors.primary,
     backgroundColor: '#eff6ff',
+  },
+  progressItemCurrentAnswered: {
+    borderColor: colors.primaryDeep,
+  },
+  progressItemCurrentWrong: {
+    borderColor: '#b91c1c',
+    backgroundColor: '#fecaca',
   },
   progressItemDraft: {
     borderColor: '#93c5fd',
     backgroundColor: '#eff6ff',
+  },
+  progressItemCurrentDraft: {
+    borderColor: colors.primary,
   },
   progressItemText: {
     fontSize: 14,
@@ -487,6 +590,9 @@ const styles = StyleSheet.create({
   },
   progressItemTextAnswered: {
     color: colors.surface,
+  },
+  progressItemTextWrong: {
+    color: colors.danger,
   },
   progressItemTextCurrent: {
     color: colors.primary,
