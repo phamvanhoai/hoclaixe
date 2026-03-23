@@ -1,4 +1,4 @@
-﻿import { createContext, useContext, useEffect, useReducer } from 'react';
+import { createContext, useContext, useEffect, useMemo, useReducer } from 'react';
 
 import { DEFAULT_LICENSE_ID, getLicenseById } from '../data/licenses';
 import { loadAppState, saveAppState } from '../services/storage/appStorage';
@@ -140,12 +140,30 @@ export function AppProvider({ children }) {
     saveAppState(persistableState);
   }, [state]);
 
-  const selectedLicense = getLicenseById(state.selectedLicenseId);
-  const questions = getQuestionsForLicense(state.selectedLicenseId);
-  const stats = getProgressStats(questions, state.questionProgress);
-  const mistakeQuestions = getMistakeQuestions(questions, state.questionProgress);
-  const bookmarkedQuestions = getBookmarkedQuestions(questions, state.bookmarkedQuestionIds);
-  const weeklyActivity = getWeeklyActivity(state.questionProgress);
+  const selectedLicense = useMemo(
+    () => getLicenseById(state.selectedLicenseId),
+    [state.selectedLicenseId],
+  );
+  const questions = useMemo(
+    () => getQuestionsForLicense(state.selectedLicenseId),
+    [state.selectedLicenseId],
+  );
+  const stats = useMemo(
+    () => getProgressStats(questions, state.questionProgress),
+    [questions, state.questionProgress],
+  );
+  const mistakeQuestions = useMemo(
+    () => getMistakeQuestions(questions, state.questionProgress),
+    [questions, state.questionProgress],
+  );
+  const bookmarkedQuestions = useMemo(
+    () => getBookmarkedQuestions(questions, state.bookmarkedQuestionIds),
+    [questions, state.bookmarkedQuestionIds],
+  );
+  const weeklyActivity = useMemo(
+    () => getWeeklyActivity(state.questionProgress),
+    [state.questionProgress],
+  );
 
   const value = {
     state,
