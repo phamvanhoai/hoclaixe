@@ -2,23 +2,14 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import ScreenContainer from '../components/common/ScreenContainer';
+import PracticalLessonIllustration from '../components/practical/PracticalLessonIllustration';
 import { colors, radii, shadows, spacing } from '../constants/theme';
 import { useAppContext } from '../context/AppContext';
 import { PRACTICAL_GUIDE_SECTIONS } from '../data/practicalGuides';
 
-const CAR_LICENSE_IDS = ['b', 'c1', 'c', 'd1'];
-const BIKE_LICENSE_IDS = ['a1', 'a'];
-
-function getRecommendedSectionId(licenseId) {
-  if (BIKE_LICENSE_IDS.includes(licenseId)) {
-    return 'motorbike';
-  }
-
-  if (CAR_LICENSE_IDS.includes(licenseId)) {
-    return 'car';
-  }
-
-  return 'car';
+function getSectionForLicense(licenseId) {
+  return PRACTICAL_GUIDE_SECTIONS.find((section) => section.licenseIds.includes(licenseId))
+    ?? PRACTICAL_GUIDE_SECTIONS[0];
 }
 
 function renderBulletList(items, textStyle) {
@@ -32,20 +23,8 @@ function renderBulletList(items, textStyle) {
 
 export default function PracticalGuideScreen({ navigation }) {
   const { selectedLicense } = useAppContext();
-  const recommendedSectionId = getRecommendedSectionId(selectedLicense.id);
-  const sections = [...PRACTICAL_GUIDE_SECTIONS].sort((left, right) => {
-    if (left.id === recommendedSectionId) {
-      return -1;
-    }
-
-    if (right.id === recommendedSectionId) {
-      return 1;
-    }
-
-    return 0;
-  });
-  const recommendedSection = sections[0];
-  const recommendationLabel = recommendedSection.id === 'car' ? 'Ô tô' : 'Mô tô';
+  const selectedSection = getSectionForLicense(selectedLicense.id);
+  const recommendationLabel = selectedSection.id === 'car' ? 'Ô tô' : 'Mô tô';
 
   return (
     <ScreenContainer>
@@ -61,19 +40,19 @@ export default function PracticalGuideScreen({ navigation }) {
 
       <View style={styles.heroCard}>
         <View style={styles.heroTopRow}>
-          <View style={[styles.heroIconWrap, { backgroundColor: `${recommendedSection.accent}18` }]}>
-            <MaterialCommunityIcons name={recommendedSection.icon} size={28} color={recommendedSection.accent} />
+          <View style={[styles.heroIconWrap, { backgroundColor: `${selectedSection.accent}18` }]}>
+            <MaterialCommunityIcons name={selectedSection.icon} size={28} color={selectedSection.accent} />
           </View>
           <View style={styles.heroCopy}>
             <Text style={styles.heroEyebrow}>Gợi ý theo hạng đang học</Text>
             <Text style={styles.heroTitle}>{recommendationLabel} • Hạng {selectedLicense.code}</Text>
-            <Text style={styles.heroBody}>{recommendedSection.subtitle}</Text>
+            <Text style={styles.heroBody}>{selectedSection.subtitle}</Text>
           </View>
         </View>
 
         <View style={styles.metricRow}>
-          {recommendedSection.metrics.map((metric) => (
-            <View key={`${recommendedSection.id}-${metric.label}`} style={styles.metricCard}>
+          {selectedSection.metrics.map((metric) => (
+            <View key={`${selectedSection.id}-${metric.label}`} style={styles.metricCard}>
               <Text style={styles.metricValue}>{metric.value}</Text>
               <Text style={styles.metricLabel}>{metric.label}</Text>
             </View>
@@ -81,68 +60,62 @@ export default function PracticalGuideScreen({ navigation }) {
         </View>
       </View>
 
-      {sections.map((section) => {
-        const isRecommended = section.id === recommendedSectionId;
-
-        return (
-          <View key={section.id} style={styles.sectionWrap}>
-            <View style={styles.sectionHeader}>
-              <View style={[styles.sectionIconWrap, { backgroundColor: `${section.accent}18` }]}>
-                <MaterialCommunityIcons name={section.icon} size={24} color={section.accent} />
-              </View>
-              <View style={styles.sectionCopy}>
-                <Text style={styles.sectionTitle}>{section.title}</Text>
-                <Text style={styles.sectionSubtitle}>{section.subtitle}</Text>
-              </View>
-              {isRecommended ? (
-                <View style={[styles.sectionBadge, { backgroundColor: `${section.accent}14` }]}>
-                  <Text style={[styles.sectionBadgeText, { color: section.accent }]}>Phù hợp nhất</Text>
-                </View>
-              ) : null}
-            </View>
-
-            <View style={styles.noteCard}>
-              {renderBulletList(section.notes, styles.noteText)}
-            </View>
-
-            {section.lessons.map((lesson) => (
-              <View key={lesson.id} style={styles.lessonCard}>
-                <View style={styles.lessonHeader}>
-                  <View style={[styles.sequenceBadge, { backgroundColor: `${section.accent}16` }]}>
-                    <Text style={[styles.sequenceText, { color: section.accent }]}>{lesson.sequence}</Text>
-                  </View>
-                  <View style={styles.lessonCopy}>
-                    <Text style={styles.lessonTitle}>{lesson.title}</Text>
-                    <Text style={styles.lessonGoal}>{lesson.goal}</Text>
-                  </View>
-                </View>
-
-                {lesson.note ? (
-                  <View style={styles.lessonNoteWrap}>
-                    <MaterialCommunityIcons name="information-outline" size={16} color={colors.info} />
-                    <Text style={styles.lessonNote}>{lesson.note}</Text>
-                  </View>
-                ) : null}
-
-                <View style={styles.blockWrap}>
-                  <Text style={styles.blockTitle}>Cách làm</Text>
-                  {renderBulletList(lesson.steps, styles.blockText)}
-                </View>
-
-                <View style={styles.blockWrap}>
-                  <Text style={styles.blockTitle}>Mẹo nhớ nhanh</Text>
-                  {renderBulletList(lesson.tips, styles.blockText)}
-                </View>
-
-                <View style={styles.blockWrap}>
-                  <Text style={[styles.blockTitle, { color: colors.danger }]}>Hay mất điểm</Text>
-                  {renderBulletList(lesson.commonMistakes, styles.blockText)}
-                </View>
-              </View>
-            ))}
+      <View style={styles.sectionWrap}>
+        <View style={styles.sectionHeader}>
+          <View style={[styles.sectionIconWrap, { backgroundColor: `${selectedSection.accent}18` }]}> 
+            <MaterialCommunityIcons name={selectedSection.icon} size={24} color={selectedSection.accent} />
           </View>
-        );
-      })}
+          <View style={styles.sectionCopy}>
+            <Text style={styles.sectionTitle}>{selectedSection.title}</Text>
+            <Text style={styles.sectionSubtitle}>{selectedSection.subtitle}</Text>
+          </View>
+          <View style={[styles.sectionBadge, { backgroundColor: `${selectedSection.accent}14` }]}> 
+            <Text style={[styles.sectionBadgeText, { color: selectedSection.accent }]}>Theo hạng hiện tại</Text>
+          </View>
+        </View>
+
+        <View style={styles.noteCard}>
+          {renderBulletList(selectedSection.notes, styles.noteText)}
+        </View>
+
+        {selectedSection.lessons.map((lesson) => (
+          <View key={lesson.id} style={styles.lessonCard}>
+            <View style={styles.lessonHeader}>
+              <View style={[styles.sequenceBadge, { backgroundColor: `${selectedSection.accent}16` }]}> 
+                <Text style={[styles.sequenceText, { color: selectedSection.accent }]}>{lesson.sequence}</Text>
+              </View>
+              <View style={styles.lessonCopy}>
+                <Text style={styles.lessonTitle}>{lesson.title}</Text>
+                <Text style={styles.lessonGoal}>{lesson.goal}</Text>
+              </View>
+            </View>
+
+            {lesson.note ? (
+              <View style={styles.lessonNoteWrap}>
+                <MaterialCommunityIcons name="information-outline" size={16} color={colors.info} />
+                <Text style={styles.lessonNote}>{lesson.note}</Text>
+              </View>
+            ) : null}
+
+            <PracticalLessonIllustration section={selectedSection} lesson={lesson} />
+
+            <View style={styles.blockWrap}>
+              <Text style={styles.blockTitle}>Cách làm</Text>
+              {renderBulletList(lesson.steps, styles.blockText)}
+            </View>
+
+            <View style={styles.blockWrap}>
+              <Text style={styles.blockTitle}>Mẹo nhớ nhanh</Text>
+              {renderBulletList(lesson.tips, styles.blockText)}
+            </View>
+
+            <View style={styles.blockWrap}>
+              <Text style={[styles.blockTitle, { color: colors.danger }]}>Hay mất điểm</Text>
+              {renderBulletList(lesson.commonMistakes, styles.blockText)}
+            </View>
+          </View>
+        ))}
+      </View>
     </ScreenContainer>
   );
 }
