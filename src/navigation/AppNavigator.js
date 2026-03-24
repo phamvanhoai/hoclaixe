@@ -15,6 +15,7 @@ import LicenseTypeScreen from '../screens/LicenseTypeScreen';
 import QuestionSessionScreen from '../screens/QuestionSessionScreen';
 import ResultScreen from '../screens/ResultScreen';
 import MistakesScreen from '../screens/MistakesScreen';
+import PracticalGuideScreen from '../screens/PracticalGuideScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -100,6 +101,7 @@ export default function AppNavigator() {
         <Stack.Screen name="QuestionSession" component={QuestionSessionScreen} />
         <Stack.Screen name="Result" component={ResultScreen} />
         <Stack.Screen name="Mistakes" component={MistakesScreen} />
+        <Stack.Screen name="PracticalGuide" component={PracticalGuideScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

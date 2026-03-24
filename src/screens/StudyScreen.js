@@ -87,6 +87,28 @@ export default function StudyScreen({ navigation }) {
         </View>
       </Pressable>
 
+      <Pressable
+        onPress={() => navigation.navigate('PracticalGuide')}
+        style={({ pressed }) => [styles.practicalGuideCard, pressed && styles.pressed]}
+      >
+        <View style={styles.practicalGuideHeader}>
+          <View style={styles.practicalGuideCopy}>
+            <Text style={styles.practicalGuideEyebrow}>Practical Guide</Text>
+            <Text style={styles.practicalGuideTitle}>Hướng dẫn sa hình lái xe</Text>
+            <Text style={styles.practicalGuideBody}>
+              Tổng hợp các bài sa hình ô tô và mô tô, mẹo căn xe, giữ ga đều và tránh mất điểm trong phần thi thực hành.
+            </Text>
+          </View>
+          <View style={styles.practicalGuideIconWrap}>
+            <MaterialCommunityIcons name="traffic-cone" size={24} color={colors.info} />
+          </View>
+        </View>
+        <View style={styles.practicalGuideFooter}>
+          <Text style={styles.practicalGuideHint}>Xem checklist, từng bài thi và lỗi hay gặp</Text>
+          <MaterialCommunityIcons name="chevron-right" size={22} color={colors.info} />
+        </View>
+      </Pressable>
+
       <View style={styles.quickRow}>
         <Pressable style={styles.quickCard} onPress={() => navigation.navigate('Mistakes')}>
           <Text style={styles.quickValue}>{mistakeQuestions.length}</Text>
@@ -233,6 +255,60 @@ const styles = StyleSheet.create({
     gap: spacing.md,
   },
   studyAllHint: {
+    flex: 1,
+    fontSize: 13,
+    lineHeight: 18,
+    color: colors.textMuted,
+  },
+  practicalGuideCard: {
+    backgroundColor: colors.surface,
+    borderRadius: radii.lg,
+    borderWidth: 1,
+    borderColor: colors.border,
+    padding: spacing.lg,
+    gap: spacing.md,
+    ...shadows.card,
+  },
+  practicalGuideHeader: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: spacing.md,
+  },
+  practicalGuideCopy: {
+    flex: 1,
+    gap: 6,
+  },
+  practicalGuideEyebrow: {
+    fontSize: 12,
+    fontWeight: '800',
+    textTransform: 'uppercase',
+    color: colors.info,
+  },
+  practicalGuideTitle: {
+    fontSize: 20,
+    fontWeight: '900',
+    color: colors.text,
+  },
+  practicalGuideBody: {
+    fontSize: 14,
+    lineHeight: 20,
+    color: colors.textMuted,
+  },
+  practicalGuideIconWrap: {
+    width: 48,
+    height: 48,
+    borderRadius: 18,
+    backgroundColor: '#ecfeff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  practicalGuideFooter: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: spacing.md,
+  },
+  practicalGuideHint: {
     flex: 1,
     fontSize: 13,
     lineHeight: 18,

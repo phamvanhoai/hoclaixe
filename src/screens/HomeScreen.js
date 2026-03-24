@@ -94,6 +94,14 @@ export default function HomeScreen({ navigation }) {
           iconColor="#ea580c"
           onPress={() => navigation.navigate('Signs')}
         />
+        <FeatureCard
+          title="Sa hình"
+          subtitle="Hướng dẫn thực hành và mẹo nhớ nhanh"
+          icon="traffic-cone"
+          tint="#eef2ff"
+          iconColor="#4f46e5"
+          onPress={() => navigation.navigate('PracticalGuide')}
+        />
       </View>
 
       <View style={styles.challengeCard}>
